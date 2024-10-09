@@ -26,7 +26,16 @@ const App = () => {
   const handleLoad = async (event) => {
     const file = event.target.files[0];
     const text = await file.text();
-    setHtml(text);
+    const fileExtension = file.name.split(".").pop();
+    if (fileExtension === "html") {
+      setHtml(text);
+    } else if (fileExtension === "css") {
+      setCss(text);
+    } else if (fileExtension === "js") {
+      setJs(text);
+    } else {
+      alert("Unsupported file type. Please upload an HTML, CSS, or JS file.");
+    }
   };
 
   return (
