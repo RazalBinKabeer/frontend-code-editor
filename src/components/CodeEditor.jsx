@@ -1,10 +1,9 @@
-import { MonacoEditor } from "@monaco-editor/react";
+import MonacoEditor from "@monaco-editor/react"; // Change this line
 
 const CodeEditor = ({ language, value, onChange }) => {
   return (
-    <div style={{ border: "1px solid black", borderRadius: "4px" }}>
-      <h2>{language.toUpperCase()} Editor</h2>
-
+    <div style={{ border: "1px solid #ddd", borderRadius: "4px" }}>
+      <h2 style={{ textAlign: "center" }}>{language.toUpperCase()} Editor</h2>
       <MonacoEditor
         height="300px"
         language={language}
