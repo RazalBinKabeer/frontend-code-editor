@@ -8,6 +8,7 @@ const App = () => {
   const [html, setHtml] = useState("");
   const [css, setCss] = useState("");
   const [js, setJs] = useState("");
+  const [output, setOutput] = useState("");
 
   // function to save code as a file
   const saveFile = (filename, content) => {
@@ -38,6 +39,15 @@ const App = () => {
     }
   };
 
+  const handleRun = () => {
+    try {
+      const output = new Function(js)();
+      setOutput(output ? output.toString() : "No output");
+    } catch (error) {
+      setOutput(`Error: ${error.message}`);
+    }
+  };
+
   return (
     <div style={{ padding: "20px" }}>
       <h1>Frontend Code Editor</h1>
@@ -55,7 +65,22 @@ const App = () => {
           onChange={handleLoad}
           style={{ marginLeft: "10px" }}
         />
+        <button onClick={handleRun} style={{ marginLeft: "10px" }}>
+          Run Code
+        </button>
       </div>
+
+      <h3>Output</h3>
+      <pre
+        style={{
+          background: "#f7f7f7",
+          color: "#000",
+          padding: "10px",
+          borderRadius: "4px",
+        }}
+      >
+        {output}
+      </pre>
     </div>
   );
 };
